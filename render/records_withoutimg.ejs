@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cd{
+            margin-left : auto;
+            margin-right: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
+            align-items: center;
+            align-self: center;
+            justify-content: center;
+            display: block;
+        }
+        .h {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            padding: 10px;
+            font-size: 1.2rem;
+        }
+        @media only screen and  (max-width: 600px) {
+            
+            .h {
+                width: 85%;
+                margin-left: 7.5%;
+                margin-right: 7.5%;
+            }
+            
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    
+<div class="input-group input-group-lg">
+  
+  <input  type="text" placeholder="Fetch || खोजे" id="inp" onkeyup="fetch()" type="text" class="form-control h" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+</div>
+
+
+
+
+
+
+        <%data.forEach((dta)=>{%>
+
+            <div class="card cd" style="width: 28rem;">
+  
+  <div class="card-body">
+    
+  <h5 class="card-title"><%=dta.date%></h5>
+            <h5 class="card-title party"><%=dta.party%></h5>
+            <h5 class="card-title amount"><%=dta.amount%></h5>
+            <h5 class="card-title note"><%=dta.note%></h5>
+            <h5 class="card-title contact"><%=dta.contact%></h5>
+            <h5 class="card-title"><%=dta.date%></h5>
+            <p class="card-text"><%=dta._id%></p>
+            
+            
+            <h5 class="card-title">Status :<h5  class="dta.check card-title"><%=dta.check%></h5></h5>
+            <h5 class="card-title"><a href="/delete/<%=dta._id%>">delete</a></h5>
+            <form class="form" action="/check_" method="post">
+                <input type="checkbox" name="check" value="true">
+                <input type="hidden" name="id" value="<%=dta._id%>">
+                <input type="submit" value="Submit">
+            </form>
+            </div>
+        </div>
+        <%})%>
+        
+        
+        <script>
+
+
+            document.addEventListener("DOMContentLoaded", function() {
+                let elements = document.getElementsByClassName("dta.check");
+                for (let i = 0; i < elements.length; i++) {
+                    if (elements[i].innerHTML === "true") {
+                        elements[i].style.color = "green";
+                        elements[i].innerHTML = "Clear";
+                        document.getElementsByClassName("form")[i].style.display = "none";
+                    } else {
+                        elements[i].style.color = "red";
+                        elements[i].innerHTML = "Pending";
+                    }
+                }
+                
+               
+            });
+            
+
+
+function fetch() {
+    let input = document.getElementById('inp').value
+    input = input.toLowerCase();
+    let x = document.getElementsByClassName('party');
+    let y = document.getElementsByClassName('amount');
+    let z = document.getElementsByClassName('contact');
+
+    for (i = 0; i < x.length; i++) {
+        if (!x[i].innerHTML.toLowerCase().includes(input) && !y[i].innerHTML.toLowerCase().includes(input) && !z[i].innerHTML.toLowerCase().includes(input)) {
+            document.getElementsByClassName('cd')[i].style.display = "none";
+        }
+        else{
+           document.getElementsByClassName('cd')[i].style.display = "block";
+        }
+    }
+}
+            
+            /*
+            let x = document.getElementsByClassName("dta.check");
+           x.forEach(e => {
+            
+            if (e.innerHTML === "true") {
+                e.style.color = "green";
+            } else {document.addEventListener
+                e.style.color = "red";
+            }})*/
+        </script>
+       
+        
+    
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        <%data.forEach((dta)=>{%>
+            <h1><%=dta.party%></h1>
+            <h1><%=dta.amount%></h1>
+            <h1><%=dta._id%></h1>
+            <h1><%=dta.date%></h1>
+            Status :<h2 class="dta.check"><%=dta.check%></h2>
+            <a href="/delete/<%=dta._id%>">delete</a>
+
+            <form class="form" action="/check/wtimg" method="post">
+                <input type="checkbox" name="check" value="true">
+                <input type="hidden" name="id" value="<%=dta._id%>">
+                <input type="submit" value="Submit">
+            </form>
+        <%})%>
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function() {
+                let elements = document.getElementsByClassName("dta.check");
+                for (let i = 0; i < elements.length; i++) {
+                    if (elements[i].innerHTML === "true") {
+                        elements[i].style.color = "green";
+                        elements[i].innerHTML = "Clear";
+                        document.getElementsByClassName("form")[i].style.display = "none";
+                    } else {
+                        elements[i].style.color = "red";
+                        elements[i].innerHTML = "Pending";
+                    }
+                }
+            });
+            /*
+            let x = document.getElementsByClassName("dta.check");
+           x.forEach(e => {
+            
+            if (e.innerHTML === "true") {
+                e.style.color = "green";
+            } else {document.addEventListener
+                e.style.color = "red";
+            }})*/
+        </script>
+       
+        
+    </h1>
+    <p>hiloooo</p>
+</body>
+</html>-->
