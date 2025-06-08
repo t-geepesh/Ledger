@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const multer  = require('multer');
-const port = process.env.PORT || 3129;
+const port = process.env.PORT || 10000;
 require('dotenv').config();
 //const upload = multer({ dest: 'uploads/' })
 
@@ -222,7 +222,7 @@ app.post("/check/wtimg", (req, res) => {
         res.status(500).send('Internal Server Error');
     });
 })
-app.listen(port, () => {
+app.listen(port,'0.0.0.0' ,() => {
     console.log(`Server is running on port ${port}`);
 })
 console.log("hilo")
